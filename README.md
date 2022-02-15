@@ -193,3 +193,32 @@ or
 
 npm install --save typescript @types/node @types/react @types/react-dom @types/jest
 ```
+### Typing the props
+- 컴포넌트의 타입을 정해주기
+```tsx
+// App.tsx
+function App() {
+  return (
+    <div>
+      <Circle bgColor="teal" />
+      <Circle bgColor="tomato" />
+    </div>
+  );
+}
+
+// Circle.tsx
+interface ContainerProps{
+  bgColor: string;
+}
+const Container = styled.div<ContainerProps>``;
+
+interface CircleProps{
+  bgColor: string;
+}
+function Circle({bgColor}: CircleProps){
+  return <Container bgColor={bgColor}/>;
+}
+```
+> interface: 객체모양을 타입스크립트에게 설명해주는 타입스크립트 개념
+
+1. 컴포넌트 자기 자신과 props를 interface를 사용하여 보호
