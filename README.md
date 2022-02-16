@@ -255,3 +255,29 @@ const [counter,setCounter] = useState<number|string>(1);
 setCounter(2); 
 setCounter("hello");
 ```
+
+### `Form`
+[참고링크](https://reactjs.org/docs/events.html)
+- 폼이벤트에서는 처음에 알수없는 타입으로 제공한다. (구글링필수)
+```ts
+const onChange =  (event:React.FormEvent<HTMLInputElement>)=>{
+  setValue(e.currentTarget.value);
+}
+```
+- ES6 문법
+
+```ts
+// 둘은 동일한 의미
+ const {currentTarget: {value}} = event; 
+
+ const value = event.currentTarget.value;
+// 여러 개를 가져 올때 유용함
+const {currentTarget: {value,tagName,width,id}} = event; 
+
+const value = event.currentTarget.value;
+const tagName = event.currentTarget.value;
+const width = event.currentTarget.value;
+const id = event.currentTarget.value;
+```
+
+
