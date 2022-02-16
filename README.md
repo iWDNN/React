@@ -185,7 +185,7 @@ plus(1,"a");
 
 ## `React + Typescript`
 
-### 1. 설치
+### 설치
 ```bash
 npx create-react-app my-app --template typescript
 
@@ -221,4 +221,23 @@ function Circle({bgColor}: CircleProps){
 ```
 > interface: 객체모양을 타입스크립트에게 설명해주는 타입스크립트 개념
 
-1. 컴포넌트 자기 자신과 props를 interface를 사용하여 보호
+- 컴포넌트 자기 자신과 props를 interface를 사용하여 보호
+
+### Optional Props and Default Props
+- props를 옵션으로 필수나 선택할수 있게 만들어줌
+```tsx
+interface CircleProps{
+  bgColor: string;
+  borderColor?: string; // ===  borderColor: string | undefined;
+}
+```
+- props 기본 값 설정해주기
+```html
+<Container borderColor={borderColor ?? "black"}>
+// borderColor 값이 정해지지 않았다면 기본값은 black으로 설정 
+```
+```tsx
+function Circle({bgColor,borderColor,text="default text"}) 
+// 이런식으로도 기본값 설정 가능
+```
+- 높이가 일정한 모형을 만들어 내는데 props를 설정하지 않으면 기본값으로 정해놓은 높이의 모형을 만듬. 과 같은 경우
