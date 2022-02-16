@@ -53,7 +53,7 @@ npm i styled-components
 ```html
   <Input required type="number" />
 ```
-html태그의 속성을 생성하면서 설정하게 만들어 주는 기능
+html태그의 attrs 설정하게 만들어 주는 기능
 
 
 ### 4. Animation and PseudoSelectors
@@ -193,7 +193,7 @@ or
 
 npm install --save typescript @types/node @types/react @types/react-dom @types/jest
 ```
-### Typing the props
+### `Typing the props`
 - 컴포넌트의 타입을 정해주기
 ```tsx
 // App.tsx
@@ -223,7 +223,7 @@ function Circle({bgColor}: CircleProps){
 
 - 컴포넌트 자기 자신과 props를 interface를 사용하여 보호
 
-### Optional Props and Default Props
+### `Optional Props and Default Props`
 - props를 옵션으로 필수나 선택할수 있게 만들어줌
 ```tsx
 interface CircleProps{
@@ -240,4 +240,18 @@ interface CircleProps{
 function Circle({bgColor,borderColor,text="default text"}) 
 // 이런식으로도 기본값 설정 가능
 ```
-- 높이가 일정한 모형을 만들어 내는데 props를 설정하지 않으면 기본값으로 정해놓은 높이의 모형을 만듬. 과 같은 경우
+- 높이가 일정한 모형을 만들어 내는데 props를 설정하지 않으면 기본값으로 정해놓은 높이의 모형을 만드는 것과 같은 경우
+
+### `State`
+- Typescript가 초기값을 가지고 타입을 자동으로 추론
+```ts
+const [counter,setCounter] = useState(1);
+setCounter("2"); //Error!
+setCounter(true); //Error!
+```
+- 두가지 자료형 타입을 사용해야 할 경우
+```ts
+const [counter,setCounter] = useState<number|string>(1);
+setCounter(2); 
+setCounter("hello");
+```
