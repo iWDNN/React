@@ -280,4 +280,19 @@ const width = event.currentTarget.value;
 const id = event.currentTarget.value;
 ```
 
+### `theme`
+- styled.d.ts
+  - 기본적으로 DefaultTheme의 인터페이스는 비어 있으므로 확장해야 한다.
+```ts
+import 'styled-components';
+
+declare module 'styled-components' {
+  export interface DefaultTheme {
+    textColor: string;
+    bgColor: string;
+    btnColor: string;
+  }
+}
+
+```
 
