@@ -334,3 +334,5 @@ export default Router;
 ```ts
 const GlobalStyle = createGlobalStyle`// reset.css`;
 ```
+### `()()`
+- 즉시 실행되는 함수.  ex) (()=>console.log('hi'))();
