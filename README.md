@@ -242,7 +242,7 @@ function Circle({bgColor,borderColor,text="default text"})
 ```
 - 높이가 일정한 모형을 만들어 내는데 props를 설정하지 않으면 기본값으로 정해놓은 높이의 모형을 만드는 것과 같은 경우
 
-### `State`
+### `useState`
 - Typescript가 초기값을 가지고 타입을 자동으로 추론
 ```ts
 const [counter,setCounter] = useState(1);
@@ -293,6 +293,38 @@ declare module 'styled-components' {
     btnColor: string;
   }
 }
-
 ```
+> declare : 변수, 상수, 함수 또는 클래스가 어딘가에 이미 선언되어 있음을 알린다.
 
+> d.ts: 구현부가 아닌 선언부만을 작성하는 용도의 파일을 의미
+
+[참고링크](https://it-eldorado.tistory.com/127)
+
+
+
+## `crypto tracker app`
+- setup
+  - react-query
+  - react-router-dom@5.3.0
+  - typescript
+  - styled-components
+
+- Router.tsx
+```tsx
+function Router() {
+  return <BrowserRouter>
+    <Switch>
+      <Route path="/:coinId">
+        <Coin />
+      </Route>
+      <Route path="/">
+        <Coins />
+      </Route>
+    </Switch>
+  </BrowserRouter>
+}
+export default Router;
+```
+### `useParams`
+  - useParams훅을 사용하면 현재 파라미터 값을 객체로 내보낸다.
+  - 타입지정 : useParams<type>
