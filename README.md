@@ -326,5 +326,11 @@ function Router() {
 export default Router;
 ```
 ### `useParams`
-  - useParams훅을 사용하면 현재 파라미터 값을 객체로 내보낸다.
-  - 타입지정 : useParams<type>
+- useParams훅을 사용하면 현재 파라미터 값을 객체로 내보낸다.
+- 타입지정 : useParams<타입>
+
+### `Reset.css`
+- createGlobalStyle을 사용하면 렌더링 될 때, 이 컴포넌트는 전역 스코프에 스타일을 돌려줌.
+```ts
+const GlobalStyle = createGlobalStyle`// reset.css`;
+```
