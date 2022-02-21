@@ -26,7 +26,8 @@ const Coin = styled.li`
   a{
     padding:20px;
     transition: color 0.2s ease-in;
-    display: block;
+    display: flex;
+    align-items: center;
   }
   &:hover{
     a{
@@ -43,6 +44,12 @@ const Title = styled.h1`
 const Loader = styled.span`
   text-align:center;
   display: block; 
+`;
+
+const Img = styled.img`
+  width:35px  ;
+  height:35px ;
+  margin-right: 10px;
 `;
 
 interface CoinInterface {
@@ -62,7 +69,7 @@ function Coins() {
       const response = await fetch('https://api.coinpaprika.com/v1/coins')
       const json = await response.json();
       setCoins(json.slice(0, 100));
-      setLoading(prev => !prev);
+      setLoading(false);
     })();
   }, [])
   console.log(coins);
@@ -75,7 +82,12 @@ function Coins() {
         <CoinList>
           {coins.map(coin => (
             <Coin key={coin.id}>
-              <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link>
+              <Link to={{
+                pathname: `/${coin.id}`,
+                state: { name: coin.name },
+              }}>
+                <Img src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} />{coin.name} &rarr;
+              </Link>
             </Coin>
           ))}
         </CoinList>
