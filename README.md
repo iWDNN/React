@@ -360,3 +360,15 @@ const response = await (
   fetch('apiUrl')
 ).json();
 ```
+
+### `Data Types`
+```js
+Object.keys(data).join() //객체 키값
+Object.values(data).map(v => typeof v).join() // 객체 자료형
+```
+- VScode shortcut 
+> Shift+Alt(Option)+i : 선택한 문자열 가장 우측 끝으로 포커싱
+
+> Ctrl(Command)+Shift+오른쪽 화살표: 현재 선택한 문자열을 기준으로 우측 끝까지 선택
+
+[JSON 데이터 -> 타입스크립트 타입 사이트](https://app.quicktype.io/?l=ts)
