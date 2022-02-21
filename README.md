@@ -309,6 +309,11 @@ declare module 'styled-components' {
   - typescript
   - styled-components
 
+- api
+  - 코인전체 : https://api.coinpaprika.com/v1/coins
+  - 코인정보 : https://api.coinpaprika.com/v1/coins/{코인이름}
+  - 코인가격 : https://api.coinpaprika.com/v1/tickers/{코인이름}
+
 - Router.tsx
 ```tsx
 function Router() {
@@ -338,10 +343,20 @@ const GlobalStyle = createGlobalStyle`// reset.css`;
 - 즉시 실행되는 함수.  ex) (()=>console.log('hi'))();
 
 ### `Behind the scene`
-- 화면 이동할 때 데이털틀 보낸다는 것은 parameter를 통해 url에게 데이터를 요청하여 정보를 얻는다. 이러한 방식이 있는 반면, Link 컴포넌트를 통해 state를 사용하는 것이다. 항상 api 요청으로만 미리 보여주는 것이 아닌 홈 화면에서 받아왔던 작은 정보들을 미리 데이터로 출력한다.
+- 화면 이동할 때 데이터를 보낸다는 것은 parameter를 통해 url에게 데이터를 요청하여 정보를 얻는다. 이러한 방식이 있는 반면, Link 컴포넌트를 통해 state를 사용하는 것이다. 항상 api 요청으로만 미리 보여주는 것이 아닌 홈 화면에서 받아왔던 작은 정보들을 미리 데이터로 출력한다.
 
 - 이러한 방식의 경우 정보를 얻는 화면을 거쳐가지않고 바로 이동하는 경우 에러가 발생한다.
 ```tsx
 <Title>{state?.name || "Loading..."}</Title>
 // 이러한 경우 ||로 에러대신 출력할 말을 위와 같이 적어주도록 하자.
+```
+
+### `api request`
+```ts
+const response = await fetch('apiUrl')
+const json = await response.json();
+// 위와 동일
+const response = await (
+  fetch('apiUrl')
+).json();
 ```
