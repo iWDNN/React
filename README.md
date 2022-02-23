@@ -344,7 +344,12 @@ const GlobalStyle = createGlobalStyle`// reset.css`;
 
 ### `Behind the scene`
 - 화면 이동할 때 데이터를 보낸다는 것은 parameter를 통해 url에게 데이터를 요청하여 정보를 얻는다. 이러한 방식이 있는 반면, Link 컴포넌트를 통해 state를 사용하는 것이다. 항상 api 요청으로만 미리 보여주는 것이 아닌 홈 화면에서 받아왔던 작은 정보들을 미리 데이터로 출력한다.
-
+```tsx
+<Link to={{
+  pathname: `/${coin.id}`,
+  state: { name: coin.name },
+}}>
+```
 - 이러한 방식의 경우 정보를 얻는 화면을 거쳐가지않고 바로 이동하는 경우 에러가 발생한다.
 ```tsx
 <Title>{state?.name || "Loading..."}</Title>
@@ -372,3 +377,22 @@ Object.values(data).map(v => typeof v).join() // 객체 자료형
 > Ctrl(Command)+Shift+오른쪽 화살표: 현재 선택한 문자열을 기준으로 우측 끝까지 선택
 
 [JSON 데이터 -> 타입스크립트 타입 사이트](https://app.quicktype.io/?l=ts)
+
+### `nested route(중첩된 라우트)`
+
+- 웹안에서 탭을 많이 사용할 경우, 스크린 안에 많은 섹션이 나뉘어진 곳에서도 유용한 라우트
+
+[CSS Grid](https://studiomeal.com/archives/533)
+
+### `useRouteMath`
+- 현재 url과 일치하는지 알려주는 훅
+```js
+const priceMatch = useRouteMatch("/:coinId/price");
+```
+- 아래는 priceMatch의 값
+```bash
+isExact: true
+params: {coinId: 'eth-ethereum'}
+path: "/:coinId/price"
+url: "/eth-ethereum/price"
+```
