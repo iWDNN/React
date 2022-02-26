@@ -396,3 +396,10 @@ params: {coinId: 'eth-ethereum'}
 path: "/:coinId/price"
 url: "/eth-ethereum/price"
 ```
+
+### `React Query`
+```bash
+npm i react-query
+```
+- react 어플리케이션에서 서버 state를 fetching,caching,synchronizing,updating 할 수 있도록 도와주는 라이브러리
+- global state를 건드리지 않고 react 어플리케이션에서 데이터를 가져오고 캐시하고, 업데이트 한다.
