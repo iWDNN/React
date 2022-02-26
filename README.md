@@ -398,8 +398,35 @@ url: "/eth-ethereum/price"
 ```
 
 ### `React Query`
+[ReactQuery 링크](https://react-query.tanstack.com/)
 ```bash
 npm i react-query
 ```
 - react 어플리케이션에서 서버 state를 fetching,caching,synchronizing,updating 할 수 있도록 도와주는 라이브러리
 - global state를 건드리지 않고 react 어플리케이션에서 데이터를 가져오고 캐시하고, 업데이트 한다.
+
+### `ApexChart Library`
+[ApexChart 링크](https://apexcharts.com/)
+- npm install --save react-apexcharts apexcharts
+- 간단한 사용 예시
+```tsx
+<ApexChart
+  type="line"
+  series={[
+    {
+      name: "hello",
+      data: [1, 2, 3, 4, 5, 6],
+    },
+    {
+      name: "sales",
+      data: [15, 18, 3, 4, 5, 6],
+    },
+  ]}
+  options={{
+    chart: {
+      height: 500,
+      width: 500
+    }
+  }} />
+```
+- value.toFixed(3) : 소숫점 3자리까지 남김
