@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation, useParams, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
-import { theme } from "../theme";
 import Chart from "./Chart";
 import Price from "./Price";
 import { useQuery } from "react-query";
+import { Helmet } from "react-helmet";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
+
 const Container = styled.div`
   padding:0px 20px;
   max-width:480px; // 
@@ -136,7 +136,11 @@ interface PriceData {
   }
 }
 
-function Coin() {
+interface ICoinProps {
+  isDark: boolean;
+}
+
+function Coin({ isDark }: ICoinProps) {
 
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
@@ -146,12 +150,15 @@ function Coin() {
     ["info", coinId], () => fetchCoinInfo(coinId)
   );
   const { isLoading: tickersLoading, data: tickersData } = useQuery<PriceData>(
-    ["tickers", coinId], () => fetchCoinPrice(coinId)
+    ["tickers", coinId], () => fetchCoinPrice(coinId), { refetchInterval: 5000 }
   );
 
   const loading = infoLoading || tickersLoading;
   return (
     <Container>
+      <Helmet>
+        <title>{state?.name ? state.name : loading ? "Loading..." : infoData?.name}</title>
+      </Helmet>
       <Header>
         <Title>{state?.name ? state.name : loading ? "Loading..." : infoData?.name}</Title>
       </Header>
@@ -167,8 +174,8 @@ function Coin() {
               <span>{infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source:</span>
-              <span>{infoData?.open_source ? "Yes" : "No"}</span>
+              <span>Price:</span>
+              <span>${tickersData?.quotes.USD.price.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
@@ -196,7 +203,7 @@ function Coin() {
               <Price />
             </Route>
             <Route path={`/:coinId/chart`}>
-              <Chart coinId={coinId} />
+              <Chart isDark={isDark} coinId={coinId} />
             </Route>
           </Switch>
         </>}

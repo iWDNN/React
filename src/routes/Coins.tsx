@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -22,9 +23,11 @@ const CoinList = styled.ul``;
 
 const Coin = styled.li`
   background-color:white;
-  color:${props => props.theme.bgColor};
+  color:${props => props.theme.textColor};
   border-radius: 15px;
   margin-bottom: 10px;
+  border: 2px solid ${props => props.theme.textColor};
+  background-color: ${props => props.theme.bgColor};
   a{
     padding:20px;
     transition: color 0.2s ease-in;
@@ -63,12 +66,21 @@ interface ICoin {
   is_active: boolean,
   type: string
 }
-function Coins() {
+
+interface ICoinsProps {
+  toggleDark: () => void;
+}
+
+function Coins({ toggleDark }: ICoinsProps) {
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
   return (
     <Container>
+      <Helmet>
+        <title>Coin</title>
+      </Helmet>
       <Header>
         <Title>Coin</Title>
+        <button onClick={toggleDark}>Toggle Dark Mode</button>
       </Header>
       {isLoading ? <Loader>Loading</Loader> : (
         <CoinList>

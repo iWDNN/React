@@ -404,8 +404,9 @@ npm i react-query
 ```
 - react 어플리케이션에서 서버 state를 fetching,caching,synchronizing,updating 할 수 있도록 도와주는 라이브러리
 - global state를 건드리지 않고 react 어플리케이션에서 데이터를 가져오고 캐시하고, 업데이트 한다.
+- 첫번째 인자 : 유니크 키, 두번째 인자 : fetcher 함수, 세번째 인자(옵션) : refetchInterval 실시간갱신주기 등 
 
-### `ApexChart Library`
+### `Chart`
 [ApexChart 링크](https://apexcharts.com/)
 - npm install --save react-apexcharts apexcharts
 - 간단한 사용 예시
@@ -430,3 +431,14 @@ npm i react-query
   }} />
 ```
 - value.toFixed(3) : 소숫점 3자리까지 남김
+
+### `React Helmet`
+- npm i react-helmet
+- 어떤 것을 render하든 문서의 head로 가게 만들어주는 컴포넌트
+
+
+## `State management`
+
+- recoil : reactjs에서 사용할 수 있는 state management library이다.
+- global state : 어플리케이션 전체에서 공유되는 state ( ex. 로그인 접속유무 state )
+- state management를 사용하면 좋은 이유 : 컴포넌트를 지나오는 단계별로 props로 변수나, 함수를 일일이 보내야하지만 이걸 사용한다면 쉽게 어디서나 호출하고 관리할 수 있다.
