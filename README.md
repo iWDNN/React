@@ -442,3 +442,10 @@ npm i react-query
 - recoil : reactjs에서 사용할 수 있는 state management library이다.
 - global state : 어플리케이션 전체에서 공유되는 state ( ex. 로그인 접속유무 state )
 - state management를 사용하면 좋은 이유 : 컴포넌트를 지나오는 단계별로 props로 변수나, 함수를 일일이 보내야하지만 이걸 사용한다면 쉽게 어디서나 호출하고 관리할 수 있다.
+- atom : 상태의 일부분, 어떤 컴포넌트에서나 읽고 쓸 수 있다. 
+  - useRecoilValue : 주어진 Reocil 상태의 값을 리턴한다.
+  - useSetRecoilState : 쓰기 가능한 Recoil 상태의 값을 업데이트하기 위한 setter 함수를 리턴한다.
+
+
+
+hook이란 무엇인가.

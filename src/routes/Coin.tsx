@@ -66,7 +66,7 @@ const Tab = styled.span<{ isActive: boolean }>`
 
 const Title = styled.h1`
   font-size:48px;
-  color:${props => props.theme.accentColor};
+  color:${props => props.theme.textColor};
 `
 
 const Loader = styled.span`
@@ -136,11 +136,9 @@ interface PriceData {
   }
 }
 
-interface ICoinProps {
-  isDark: boolean;
-}
 
-function Coin({ isDark }: ICoinProps) {
+
+function Coin() {
 
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
@@ -203,7 +201,7 @@ function Coin({ isDark }: ICoinProps) {
               <Price />
             </Route>
             <Route path={`/:coinId/chart`}>
-              <Chart isDark={isDark} coinId={coinId} />
+              <Chart coinId={coinId} />
             </Route>
           </Switch>
         </>}
