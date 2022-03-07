@@ -438,14 +438,34 @@ npm i react-query
 
 
 ## `State management`
-
+- npm i recoil
 - recoil : reactjs에서 사용할 수 있는 state management library이다.
 - global state : 어플리케이션 전체에서 공유되는 state ( ex. 로그인 접속유무 state )
 - state management를 사용하면 좋은 이유 : 컴포넌트를 지나오는 단계별로 props로 변수나, 함수를 일일이 보내야하지만 이걸 사용한다면 쉽게 어디서나 호출하고 관리할 수 있다.
 - atom : 상태의 일부분, 어떤 컴포넌트에서나 읽고 쓸 수 있다. 
-  - useRecoilValue : 주어진 Reocil 상태의 값을 리턴한다.
-  - useSetRecoilState : 쓰기 가능한 Recoil 상태의 값을 업데이트하기 위한 setter 함수를 리턴한다.
+- useRecoilValue : 주어진 Reocil 상태의 값을 리턴한다.
+- useSetRecoilState : 쓰기 가능한 Recoil 상태의 값을 업데이트하기 위한 setter 함수를 리턴한다.
+
+## `React Hook Form`
+- react에서 Form을 작업하기에 가장 좋은 방법
+- npm i react-hook-form
+- const {register, watch, handleSubmit, formState } = useForm();
+  - register : name, onBlur, onChange, html요소의 attrs도 미리 설정 가능 {...name, {required : true, pattern: regExp}}
+    - 1. 기존에 html에서 attrs를 설정한다면 브라우저 콘솔창에서 수정하고 조작이 가능하여 보안성이 없었음.
+    - 2. js로 form에서 받는 변수를 일일이 길이 제한 조건문이나 수동으로 제한을 넣는 코드를 짬.
+    - 3. react-hook-form에서는 js에서 html의 attrs를 사용했을때 브라우저 콘솔창에서도 확인할수 없지만 그대로 동작됨 (보안, 코드복잡성x)
+    - 4. 기존 html 코드에서 attrs로 설정한 경우, 브라우저에서 말풍선 알림과 함께 에러가 뜨지만, react-hook-form은 에러난 곳의 element로 focus만 됨. 하지만 formState.errors로 추적 가능.(보완)
+
+  - watch : form의 입력값 추적
+  - handleSubmit : 폼의 onSubmit 이벤트 함수로, 데이터가 유효할 경우 작동하는 onValid(필수) 함수와 유효하지 않을 경우 onInvalid(옵션) 함수 두가지 인자를 받는다.(폼의 다른 element들의 validation을 모두 마친후에 유효한 데이터인지, 유효하지 않은지 마지막에 작동한다.)
+  - formState : 폼의 상태, 에러 등을 객체로 받아온다.
+    - errors
+      - type , message를 받아오는데 type은 알아서 작성되고, message는 타입에 따라 message 혹은 { value : value, message: message }를 담아서 element에 보내면 된다. ( 처음 제출하고 난 이후부터 값이 바뀔때 마다 실시간 갱신)
 
 
 
-hook이란 무엇인가.
+hook
+regexp
+recoil
+redux
+둘의차이
