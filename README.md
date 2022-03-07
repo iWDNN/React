@@ -445,12 +445,21 @@ npm i react-query
 - atom : 상태의 일부분, 어떤 컴포넌트에서나 읽고 쓸 수 있다. 
 - useRecoilValue : 주어진 Reocil 상태의 값을 리턴한다.
 - useSetRecoilState : 쓰기 가능한 Recoil 상태의 값을 업데이트하기 위한 setter 함수를 리턴한다.
+- useRecoilState : 위 두가지를 배열로 받음, ex) const [value,setValueFn]
+  - setValueFn( prev => changed something)
 
 ## `React Hook Form`
 - react에서 Form을 작업하기에 가장 좋은 방법
 - npm i react-hook-form
-- const {register, watch, handleSubmit, formState } = useForm();
-  - register : name, onBlur, onChange, html요소의 attrs도 미리 설정 가능 {...name, {required : true, pattern: regExp}}
+- const {register, watch, handleSubmit, formState, setError } = useForm();
+  - register : input요소의 name, onBlur, onChange, html요소의 attrs도 미리 설정 가능 
+  {...name,
+    {
+      required : true,
+      pattern: regExp,
+      validate : (value) => boolean
+    }
+  }
     - 1. 기존에 html에서 attrs를 설정한다면 브라우저 콘솔창에서 수정하고 조작이 가능하여 보안성이 없었음.
     - 2. js로 form에서 받는 변수를 일일이 길이 제한 조건문이나 수동으로 제한을 넣는 코드를 짬.
     - 3. react-hook-form에서는 js에서 html의 attrs를 사용했을때 브라우저 콘솔창에서도 확인할수 없지만 그대로 동작됨 (보안, 코드복잡성x)
@@ -461,6 +470,8 @@ npm i react-query
   - formState : 폼의 상태, 에러 등을 객체로 받아온다.
     - errors
       - type , message를 받아오는데 type은 알아서 작성되고, message는 타입에 따라 message 혹은 { value : value, message: message }를 담아서 element에 보내면 된다. ( 처음 제출하고 난 이후부터 값이 바뀔때 마다 실시간 갱신)
+  - setError : 특정한 에러를 발생하게 만들어준다.
+  - setValue : 말그대로의 의미
 
 
 
