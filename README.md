@@ -473,6 +473,8 @@ npm i react-query
   - setError : 특정한 에러를 발생하게 만들어준다.
   - setValue : 말그대로의 의미
 
+- interface를 설정할때 그 안의 속성 한가지만 사용하고 싶으면, 변수 : 인터페이스명["속성명"] 을 사용하면 된다.
+
 
 
 hook
