@@ -448,6 +448,11 @@ npm i react-query
 - useRecoilState : 위 두가지를 배열로 받음, ex) const [value,setValueFn]
   - setValueFn( prev => changed something)
 
+- selector : 파생된 상태(derived state)의 일부를 나타낸다. state를 입력 받아서 그걸 변형해 반환하는 순수함수를 거쳐 반환된 값을 말한다. 정확히 모르겠음 뭔말인지 atom의 output을 변형시키는 도구
+  - state의 본질을 변경하는게 아닌 output만 변형시키는 도구
+  - vuex getter,setter 느낌
+
+
 ## `React Hook Form`
 - react에서 Form을 작업하기에 가장 좋은 방법
 - npm i react-hook-form
@@ -482,3 +487,7 @@ regexp
 recoil
 redux
 둘의차이
+export
+import
+enum
+type
