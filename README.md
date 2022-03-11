@@ -480,7 +480,48 @@ npm i react-query
 
 - interface를 설정할때 그 안의 속성 한가지만 사용하고 싶으면, 변수 : 인터페이스명["속성명"] 을 사용하면 된다.
 
+## `Framer Motion`
+- animation library
+- npm i framer-motion
+- <motion.html엘리먼트>
+- styled-componets에 적용할 경우 : const 변수명 = styled(motion.div)``;
 
+- properties. ex)
+```js
+  initial : {
+    scale :0
+  } 
+  // 애니메이션 시작할 때 설정
+  transition : { 
+    type : "spring" | "tween" // spring은 현실의 물리현상이 들어간(?) 애니메이션, tween은 선형적인 애니메이션
+    mass : number, // 물체 무게
+    damping : number // 반동, 0에 가까울수록 반동이 적어짐 ,0은 무기한진동
+    stiffness : number // 경직성
+    duration : number,
+    delay : 5
+  } 
+  // 애니메이션 상태 변화 설정
+  animate : {
+    borderRadius : "100px"
+  } 
+  // 애니메이션 상태 변화
+```
+- variant
+  - component code를 깔끔하게 해줌 (복잡성x, 가독성)
+```tsx
+const myVars = {
+	start: { scale: 0 },
+	end: { scale: 1, rotateZ: 360, transition: { type: "spring", delay: 2 } }
+}
+
+function App() {
+	return <>
+		<Wrapper>
+			<Box variants={myVars} initial="start" animate="end" />
+		</Wrapper>
+	</>
+}
+```
 
 hook
 regexp
