@@ -451,7 +451,23 @@ npm i react-query
 - selector : 파생된 상태(derived state)의 일부를 나타낸다. state를 입력 받아서 그걸 변형해 반환하는 순수함수를 거쳐 반환된 값을 말한다. 정확히 모르겠음 뭔말인지 atom의 output을 변형시키는 도구
   - state의 본질을 변경하는게 아닌 output만 변형시키는 도구
   - vuex getter,setter 느낌
-
+  - get : state를 받아와서 본래의 atom값을 바꾸지 않고, 조건에 따른 값으로 출력가능
+  - set : state를 set하는 것을 도와주는 속성, atom의 값을 수정하는 것을 도와줌
+    - set함수는 원래의 state가 어떤 것이든 그걸로 수정하게 도와줌. 
+    - set을 호출하여 사용하는 방법 , const [get 속성에서 반환한 값, set 속성에서 부르는 함수] = useRecoilSelector(selector)
+```ts
+const selector = atoms({
+  key:uniqueKey,
+  get:({get}) => {
+    const state = get(atomState)
+    return state * 2
+  }
+  set:({set}, newValue) => {
+    const changedValue = newValue * 2;
+    set(atomState, changedValue);
+  }
+})
+```
 
 ## `React Hook Form`
 - react에서 Form을 작업하기에 가장 좋은 방법
@@ -479,6 +495,10 @@ npm i react-query
   - setValue : 말그대로의 의미
 
 - interface를 설정할때 그 안의 속성 한가지만 사용하고 싶으면, 변수 : 인터페이스명["속성명"] 을 사용하면 된다.
+
+## `Trello Clone`
+- drag and drops app site
+- npm i react-beautiful-dnd
 
 ## `Framer Motion`
 - animation library
@@ -510,8 +530,19 @@ npm i react-query
   - component code를 깔끔하게 해줌 (복잡성x, 가독성)
 ```tsx
 const myVars = {
-	start: { scale: 0 },
-	end: { scale: 1, rotateZ: 360, transition: { type: "spring", delay: 2 } }
+	start: { 
+    scale: 0 
+  },
+	end: { 
+    scale: 1,
+    rotateZ: 360,
+      transition: { 
+        type: "spring",
+        delay: 2,
+        delayChildren:0.5, // 말그대로 자식 컴포넌트 애니메이션의 딜레이
+        staggerChildren:0.5 // 자식컴포넌트의 순차적 애니메이션 딜레이
+      } 
+  }
 }
 
 function App() {
@@ -532,3 +563,4 @@ export
 import
 enum
 type
+제네릭, 다운캐스팅 - () <>
