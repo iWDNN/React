@@ -499,6 +499,12 @@ const selector = atoms({
 ## `Trello Clone`
 - drag and drops app site
 - npm i react-beautiful-dnd
+- DragDropContext
+  - Droppable : 어떠한 것을 드롭할 수 있는 역역 
+  - Draggable : 우리가 드래그 할수 있는 영역
+    - dragHandleProps : 드래그를 사용할수 있게 만들어주는 영역
+- splice
+    
 
 ## `Framer Motion`
 - animation library
@@ -564,3 +570,5 @@ import
 enum
 type
 제네릭, 다운캐스팅 - () <>
+mutation,
+actions, setter, getter

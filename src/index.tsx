@@ -32,8 +32,8 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	color:${prev => prev.theme.color};
-	background-color: ${prev => prev.theme.backgroundColor};
+	color:${props => props.theme.color};
+	background-color: ${props => props.theme.bgColor};
 
 }
 ol, ul {

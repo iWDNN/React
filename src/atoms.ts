@@ -1,19 +1,6 @@
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
 
-export const minutesState = atom({
-  key: "minutesState",
-  default: 0
+export const toDoState = atom({
+  key: "toDo",
+  default: ["a", "b", "c", "d", "e", "f", "g"]
 })
-
-export const hourSelector = selector<number>({
-  key: "hours",
-  get: ({ get }) => {
-    const minutes = get(minutesState);
-    return Math.floor(minutes / 60);
-  },
-  set: ({ set }, newValue) => {
-    const minutes = +newValue * 60;
-    set(minutesState, minutes);
-  }
-})
-
