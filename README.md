@@ -1,9 +1,21 @@
-# React + Typecript 
+# nomad-corders
+## react-masterclass
 ##  `styled-component`
 ### 1. 설치 
 ```bash
 npm i styled-components
 ```
+```
+Extension: vscode-styled-components 
+```
+ 
+  
+```js   
+  const 변수명 = styled.(원하는 태그명)`
+    css 스타일 지정
+  `
+```
+- 예시
 ```js
   const Container = styled.div`
     display:flex;
@@ -11,40 +23,53 @@ npm i styled-components
     align-item:center;
   `;
 ```
-- extension: vscode-styled-components
+
 
 ### 2. extend, props styled-components
 - props
-```js
+```jsx
   const Box = styled.div`
     backgroundColor:${props=>props.bgColor}
     width:100px;
     height:100px;
   `
+  function App(){
+    return(
+      <Container>
+        <Box bgColor="green" />
+        <Box bgColor="yellow" />
+      </Container>
+    )
+  }
 ```
 
-- extend
+- extend  
+    - 다른 컴포넌트의 스타일을  사용하면서 다른 속성들을 추가시킬수 있음
 ```js
+// 위 Box 컴포넌트의 속성들을 모두 가지고 있음
   const Circle = styled(Box)`
     border-radius:50px;
   `
 ```
-다른 컴포넌트의 스타일을 그대로 사용하면서 확장시키는 기능
+
 
 ### 3. 'As' and Attrs
 - As
-```js
+    - 컴포넌트의 태그를 바꾸고 싶지만 스타일은 바꾸고 싶지 않을때 사용하는 기능
+```jsx
   const Btn = styled.button`
     background-color:tomato;
   `
+  function App(){
+    return(
+      <Btn /> // === <button></button> 
+      <Btn as="a"/> // === <a></a>
+  )
+  }
 ```
-```html
-  <Btn/> /* button tag */
-  <Btn as="a"/> /* a tag */
-```
-  Btn의 스타일을 그대로 사용 하되 html의 다른 태그로 사용하고 싶은 경우 `as`사용
 
 - Attrs
+    - html태그의 attrs을 styled-components를 생성할 때 설정하게 만들어 주는 기능  
 ```js
   const Input = styled.input.attrs({required:true, type:"number"})`
     background-color:teal;
@@ -53,10 +78,9 @@ npm i styled-components
 ```html
   <Input required type="number" />
 ```
-html태그의 attrs 설정하게 만들어 주는 기능
 
 
-### 4. Animation and PseudoSelectors
+### 4. Animation and StateSelecotr
 - animation
 ```js
 import { keyframes } from 'styled-components';
@@ -85,7 +109,7 @@ width:200px;
 ```
 keyframes를 통해 애니메이션 생성 가능
 
-- PseudoSelectors
+- StateSelector
 ```html
   <Box>
     <span>😀</span>
@@ -107,8 +131,8 @@ const Box = styled.div`
 ```
 컴포넌트 안에서 하위 요소의 스타일도 지정 가능
 
-### 5. PseudoSelectors II
-
+### 5. State Selector II
+- 태그명에 의존하지 않고 컴포넌트 명으로 하위 요소 관리 가능
 ```js
   const Emoji = styled.span`
     font-size:36px;
@@ -118,19 +142,16 @@ const Box = styled.div`
   justify-content:center;
   align-items:center;
   animation:${rotateAnimation} 1s linear;
-  ${Emoji}{
-    &:hover{
-      font-size:40px;
-    }
+  ${Emoji}:hover{
+    font-size:40px;
   }
 `
 ```
 
-styled-component 이름을 선택하여 하위 컴포넌트 스타일 관리 가능
-
 ### 6. theme
-- index.js
+- dark모드같은 기능을 구현하기 좋음
 ```js
+// index.js
 import {ThemeProvider} from "styled-components";
 
 const darkTheme = {
@@ -151,9 +172,8 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
-
-- App.js
 ```js
+// App.js
 const Wrapper = styled.div`
   background-color:${props=>props.theme.backgroundColor}
 `
@@ -165,12 +185,13 @@ const Title = styled.h1`
 ThemeProvider를 통해 전역 색상을 관리하기 용이하다.
 다크모드/라이트 모드, 테마를 만들때 편하다.
 
-##  `TypeScript`
+# 1 단원 캍!
 
-- javascript를 기반으로 한 언어, javascript의 모든 기능은 제공하면서 추가적인 기능 제공.
-- 언어가 작동하기 전에 타입을 확인해줌(strongly typed)
-- 장점 : javascript는 명시적인 설명 유형, 데이터에 대 한 설명을 제공하지 못하지만, typescript는 가능.
+#  `TypeScript`
 
+- javascript를 기반으로 한 웹 프로그래밍 언어, javascript의 모든 기능은 제공하면서 추가적인 기능 제공.
+(다른 프로그래밍 언어지만 큰 갭은 아님 )
+- strongly typed : 코드가 실행되기 "전"에 type을 확인해줌. "[propTypes는 코드가 실행되고 브라우저로 알려줌]
 ```js
 const plus = (a,b) => a+b;
 plus(1,"a");
@@ -182,17 +203,17 @@ const plus = (a:number, b:number) => a+b;
 plus(1,"a");
 // TypeError!
 ```
+- 브라우저는 typescript를 이해하지 못함 그래서 typescript가 자동으로 컴파일 해서 javascript에 알려줌
+- javascript는 명시적인 설명 유형, 데이터에 대 한 설명을 제공하지 못하지만, typescript는 가능.
 
-## `React + Typescript`
+
+## React + Typescript
 
 ### 설치
 ```bash
-npx create-react-app my-app --template typescript
-
-or
-
-npm install --save typescript @types/node @types/react @types/react-dom @types/jest
+npx create-react-app@latest my-app --template typescript
 ```
+
 ### `Typing the props`
 - 컴포넌트의 타입을 정해주기
 ```tsx
@@ -207,65 +228,69 @@ function App() {
 }
 
 // Circle.tsx
+
+interface CircleProps{
+  bgColor: string;
+}
+
 interface ContainerProps{
   bgColor: string;
 }
 const Container = styled.div<ContainerProps>``;
 
-interface CircleProps{
-  bgColor: string;
-}
 function Circle({bgColor}: CircleProps){
   return <Container bgColor={bgColor}/>;
 }
+// App.tsx에서 Circle.tsx 그리고 Circle 내의 Container컴포넌트까지에 프랍스를 전달하는 코드
 ```
 > interface: 객체모양을 타입스크립트에게 설명해주는 타입스크립트 개념
-
 - 컴포넌트 자기 자신과 props를 interface를 사용하여 보호
 
 ### `Optional Props and Default Props`
-- props를 옵션으로 필수나 선택할수 있게 만들어줌
+- Optional Props
+    - props를 옵션으로 만들어줌(필수 or 선택)
 ```tsx
 interface CircleProps{
   bgColor: string;
   borderColor?: string; // ===  borderColor: string | undefined;
 }
 ```
-- props 기본 값 설정해주기
+- Default Props
+    - props 기본 값 설정해주기
 ```html
 <Container borderColor={borderColor ?? "black"}>
-// borderColor 값이 정해지지 않았다면 기본값은 black으로 설정 
+// borderColor를 필수로 받아야 하는 상황에서 값을 undefined로 설정해도 기본값을 설정하는 방법 
 ```
 ```tsx
 function Circle({bgColor,borderColor,text="default text"}) 
-// 이런식으로도 기본값 설정 가능
+// text라는 값을 옵션으로 받아도 기본값을 인자에서 설정해주고 싶을 때 위처럼 사용(ES6 Javascript 구문)
 ```
-- 높이가 일정한 모형을 만들어 내는데 props를 설정하지 않으면 기본값으로 정해놓은 높이의 모형을 만드는 것과 같은 경우
 
-### `useState`
+
+### `useState의 Type`
 - Typescript가 초기값을 가지고 타입을 자동으로 추론
 ```ts
-const [counter,setCounter] = useState(1);
-setCounter("2"); //Error!
-setCounter(true); //Error!
+const [counter,setCounter] = useState(1); //data type : number
+setCounter("2"); // error!
+setCounter(true); // error!
 ```
 - 두가지 자료형 타입을 사용해야 할 경우
 ```ts
-const [counter,setCounter] = useState<number|string>(1);
-setCounter(2); 
-setCounter("hello");
+const [value,setValue] = useState<number|string>(1);
+setValue(2); // no error
+setValue("hello"); // no error
 ```
 
-### `Form`
-[참고링크](https://reactjs.org/docs/events.html)
-- 폼이벤트에서는 처음에 알수없는 타입으로 제공한다. (구글링필수)
+### `Form의 Type`
+- Form의 이벤트 타입 선언
 ```ts
 const onChange =  (event:React.FormEvent<HTMLInputElement>)=>{
   setValue(e.currentTarget.value);
 }
 ```
-- ES6 문법
+[폼 이벤트 타입 참고링크](https://reactjs.org/docs/events.html)
 
+- ES6 문법
 ```ts
 // 둘은 동일한 의미
  const {currentTarget: {value}} = event; 
@@ -282,7 +307,8 @@ const id = event.currentTarget.value;
 
 ### `theme`
 - styled.d.ts
-  - 기본적으로 DefaultTheme의 인터페이스는 비어 있으므로 확장해야 한다.
+  - styled-components에 선언된 타입 파일
+- 확장시켜서 사용하고 싶으므로 아래의 파일을 생성
 ```ts
 import 'styled-components';
 
