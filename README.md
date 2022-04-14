@@ -185,7 +185,7 @@ const Title = styled.h1`
 ThemeProvider를 통해 전역 색상을 관리하기 용이하다.
 다크모드/라이트 모드, 테마를 만들때 편하다.
 
-# 1 단원 캍!
+# 1 단원 
 
 #  `TypeScript`
 
@@ -326,7 +326,7 @@ declare module 'styled-components' {
 
 [참고링크](https://it-eldorado.tistory.com/127)
 
-
+# 2단원 
 
 ## `crypto tracker app`
 - setup
