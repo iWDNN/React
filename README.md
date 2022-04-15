@@ -329,47 +329,45 @@ declare module 'styled-components' {
 # 2단원 
 
 ## `crypto tracker app`
-- setup
+- Setup
+  - create-react-app --template typescript
   - react-query
-  - react-router-dom@5.3.0
-  - typescript
+  - react-router-dom@5.3.0 -> 2022.04.15 react-router-dom Switch가 동작하지 않아 6.3.0 사용
   - styled-components
-
-- api
+  
+- Api
   - 코인전체 : https://api.coinpaprika.com/v1/coins
   - 코인정보 : https://api.coinpaprika.com/v1/coins/{코인이름}
   - 코인가격 : https://api.coinpaprika.com/v1/tickers/{코인이름}
-
-- Router.tsx
-```tsx
-function Router() {
-  return <BrowserRouter>
-    <Switch>
-      <Route path="/:coinId">
-        <Coin />
-      </Route>
-      <Route path="/">
-        <Coins />
-      </Route>
-    </Switch>
-  </BrowserRouter>
-}
-export default Router;
+- etc
+  - Font : fonts.google.com - Source Sans Pro 300 400
+  - Color : flatuicolors.com/palette/gb
 ```
-### `useParams`
-- useParams훅을 사용하면 현재 파라미터 값을 객체로 내보낸다.
-- 타입지정 : useParams<타입>
-
-### `Reset.css`
-- createGlobalStyle을 사용하면 렌더링 될 때, 이 컴포넌트는 전역 스코프에 스타일을 돌려줌.
-```ts
-const GlobalStyle = createGlobalStyle`// reset.css`;
+"Router 경로"
+/ -> Allcoin
+/:id -> /btc -> Coin Detail
+/btc/information
+/btc/chart
 ```
-### `()()`
-- 즉시 실행되는 함수.  ex) (()=>console.log('hi'))();
+- Hook
+  - react-router-dom
+    - useParams : 현재 파라미터 값을 객체로 내보낸다.
+### React-Fragment
+- 부모 컴포넌트 없이 자식들끼리 있는 컴포넌트를 내보내주는 유령 컴포넌트
+```html
+<></> === <React.Fragment></React.Fragment>
+```
+### React-query
+[ReactQuery 링크](https://react-query.tanstack.com/)
+```bash
+npm i react-query
+```
+- react 어플리케이션에서 서버 state를 fetching,caching,synchronizing,updating 할 수 있도록 도와주는 라이브러리
+- global state를 건드리지 않고 react 어플리케이션에서 데이터를 가져오고 캐시하고, 업데이트 한다.
+- 첫번째 인자 : 유니크 키, 두번째 인자 : fetcher 함수, 세번째 인자(옵션) : refetchInterval 실시간갱신주기 등 
 
-### `Behind the scene`
-- 화면 이동할 때 데이터를 보낸다는 것은 parameter를 통해 url에게 데이터를 요청하여 정보를 얻는다. 이러한 방식이 있는 반면, Link 컴포넌트를 통해 state를 사용하는 것이다. 항상 api 요청으로만 미리 보여주는 것이 아닌 홈 화면에서 받아왔던 작은 정보들을 미리 데이터로 출력한다.
+### Behind the scene
+  - 화면 이동할 때 데이터를 보낸다는 것은 parameter를 통해 url에게 데이터를 요청하여 정보를 얻는다. 이러한 방식이 있는 반면, Link 컴포넌트를 통해 state를 사용하는 것이다. 항상 api 요청으로만 미리 보여주는 것이 아닌 홈 화면에서 받아왔던 작은 정보들을 미리 데이터로 출력한다.
 ```tsx
 <Link to={{
   pathname: `/${coin.id}`,
@@ -382,14 +380,36 @@ const GlobalStyle = createGlobalStyle`// reset.css`;
 // 이러한 경우 ||로 에러대신 출력할 말을 위와 같이 적어주도록 하자.
 ```
 
+
+
+
+
+
+### `Tips`
+- 전역에 css 적용시키기
+  - createGlobalStyle을 사용하면 렌더링 될 때, 이 컴포넌트는 전역 스코프에 스타일을 돌려줌.
+```ts
+import {createGlobalStyle} from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+// 전역에 적용할 CSS
+`;
+```
+
+- ()()
+  - 즉시 실행되는 함수.  ex) (()=>console.log('hi'))();
+
+
+
+
+
+
 ### `api request`
 ```ts
 const response = await fetch('apiUrl')
 const json = await response.json();
 // 위와 동일
-const response = await (
-  fetch('apiUrl')
-).json();
+const response = await ( fetch('apiUrl') ).json();
 ```
 
 ### `Data Types`
