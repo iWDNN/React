@@ -643,33 +643,10 @@ const selector = atoms({
 
 - animation library
 - npm i framer-motion
-- <motion.html엘리먼트>
-- styled-componets에 적용할 경우 : const 변수명 = styled(motion.div)``;
+- 기본 사용법 : <motion.(html엘리먼트)>
+- styled-componets에 적용할 경우 : const Component = styled(motion.div)``;
 
-- properties. ex)
-
-```js
-  // 애니메이션 시작할 때 설정
-  initial : {
-    scale :0
-  }
-  // 애니메이션 상태 변화 설정
-  transition : {
-    type : "spring" | "tween" // spring은 현실의 물리현상이 들어간(?) 애니메이션, tween은 선형적인 애니메이션
-    mass : number, // 물체 무게
-    damping : number // 반동, 0에 가까울수록 반동이 적어짐 ,0은 무기한진동
-    stiffness : number // 경직성
-    duration : number,
-    delay : 5
-  }
-  // 애니메이션 상태 변화
-  animate : {
-    borderRadius : "100px"
-  }
-```
-
-- variant
-  - component code를 깔끔하게 해줌 (복잡성x, 가독성)
+`Animation, Varaints`
 
 ```tsx
 const myVars = {
@@ -693,15 +670,49 @@ const myVars = {
     },
   },
 };
+function App(){
+  return(
+    <Wrapper>
+      <Box variants={myVars} initial="start" animate="end" />
+    </Wrapper>
+  )
+}
+```
 
+`Gestures, Drag `
+
+```tsx
+const boxVariants = {
+  hover: {
+    scale: 1.5,
+    rotateZ: 90,
+  },
+  click: {
+    scale: 1,
+    borderRadius: "100px",
+  },
+  drag: {
+    backgroundColor: "rgba(255,255,255,0.2)",
+    transition: { duration: 1 },
+  },
+};
 function App() {
+  const biggerBoxRef = useRef<HTMLDivElement>(null);
   return (
-    <>
-      <Wrapper>
-        <Box variants={myVars} initial="start" animate="end" />
-          <Circle /> 자식에게 initial과 animate가 상속됨
-      </Wrapper>
-    </>
+    <Wrapper>
+      <BiggerBox ref={biggerBoxRef}>
+        <Box
+          drag
+          dragSnapToOrigin // 클릭을 놓았을 때 가운데로 초기화
+          dragElastic={1} // 클릭을 놓았을 당기는 힘
+          dragConstraints={biggerBoxRef} // 큰박스안에서 머물도록 제약
+          variants={boxVariants}
+          whileHover="hover"
+          whileDrag="drag"
+          whileTap="click"
+        />
+      </BiggerBox>
+    </Wrapper>
   );
 }
 ```
