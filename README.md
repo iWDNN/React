@@ -688,6 +688,8 @@ const myVars = {
       delay: 2,
       delayChildren: 0.5, // 말그대로 자식 컴포넌트 애니메이션의 딜레이
       staggerChildren: 0.5, // 자식컴포넌트의 순차적 애니메이션 딜레이
+      delayChildren: 0.2, // 자식 애니메이션 전체 실행 딜레이
+      staggerChildren: 0.1, // 자식 애니메이션 순차 실행 딜레이
     },
   },
 };
@@ -697,6 +699,7 @@ function App() {
     <>
       <Wrapper>
         <Box variants={myVars} initial="start" animate="end" />
+          <Circle /> 자식에게 initial과 animate가 상속됨
       </Wrapper>
     </>
   );
