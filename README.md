@@ -649,10 +649,11 @@ const selector = atoms({
 - properties. ex)
 
 ```js
+  // 애니메이션 시작할 때 설정
   initial : {
     scale :0
   }
-  // 애니메이션 시작할 때 설정
+  // 애니메이션 상태 변화 설정
   transition : {
     type : "spring" | "tween" // spring은 현실의 물리현상이 들어간(?) 애니메이션, tween은 선형적인 애니메이션
     mass : number, // 물체 무게
@@ -661,11 +662,10 @@ const selector = atoms({
     duration : number,
     delay : 5
   }
-  // 애니메이션 상태 변화 설정
+  // 애니메이션 상태 변화
   animate : {
     borderRadius : "100px"
   }
-  // 애니메이션 상태 변화
 ```
 
 - variant
@@ -680,7 +680,11 @@ const myVars = {
     scale: 1,
     rotateZ: 360,
     transition: {
-      type: "spring",
+      type: "spring", // 물리법칙을 시뮬레이트하는 타입 힘, 탄력성, 경직도
+      damping: 2 // 저항
+      stiffness: 2 // 경직
+      mass : 5 // 무게
+      bounce : 0.25 // 탄력
       delay: 2,
       delayChildren: 0.5, // 말그대로 자식 컴포넌트 애니메이션의 딜레이
       staggerChildren: 0.5, // 자식컴포넌트의 순차적 애니메이션 딜레이
