@@ -717,6 +717,12 @@ function App() {
 }
 ```
 
+`Motion Value`
+
+- useMotionValue : React의 state에 종속되지 않은 값 (값이 바뀌어도 재렌더링이 일어나지 않음)
+  - x.onChange(() => console.log(x.get()));
+- useTransForm : Motion values와 값을 연결해주는 훅
+
 hook
 regexp
 recoil
