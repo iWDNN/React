@@ -723,19 +723,21 @@ function App() {
   - x.onChange(() => console.log(x.get()));
 - useTransForm : Motion values와 값을 연결해주는 훅
 - useViewportScroll : scroll 액션에 따른 값 설정
+- animatePresence : custom, exitBeforeEnter
+- react.js component들은 key에 따라 생성된다.
 
-hook
-regexp
-recoil
-redux
-둘의차이
-export
-import
-enum
-type
-제네릭, 다운캐스팅 - () <>
-mutation,
-actions, setter, getter
+  hook
+  regexp
+  recoil
+  redux
+  둘의차이
+  export
+  import
+  enum
+  type
+  제네릭, 다운캐스팅 - () <>
+  mutation,
+  actions, setter, getter
 
 recoil - 전역 변수 관리
 react-query - api 받아온 데이터 관리(?)
