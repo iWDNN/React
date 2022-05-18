@@ -8,73 +8,54 @@ const Wrapper = styled(motion.div)`
   align-items: center;
   height: 100vh;
   background: linear-gradient(135deg, #9fc088, #e8c07d);
-  flex-direction: column;
+`;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 50vw;
+  gap: 10px;
+  div:first-child,
+  div:last-child {
+    grid-column: span 2;
+  }
 `;
 const Box = styled(motion.div)`
+  height: 100px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
+`;
+
+const Overlay = styled(motion.div)`
+  width: 100%;
+  height: 100%;
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
-  top: 100px;
-  width: 500px;
-  height: 200px;
-  border-radius: 20px;
-  background-color: white;
 `;
-const myVar: Variants = {
-  entry: (isBack: boolean) => ({
-    x: isBack ? -500 : 500,
-    opacity: 0,
-    scale: 0,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-    scale: 1,
-    rotateX: 360,
-    transition: {
-      duration: 1,
-    },
-  },
-  exit: (isBack: boolean) => ({
-    x: isBack ? 500 : -500,
-    opacity: 0,
-    scale: 0,
-    rotateX: 360,
-    transition: {
-      duration: 1,
-    },
-  }),
-};
 
 function App() {
-  const [visible, setVisible] = useState(1);
-  const [back, setBack] = useState(false);
-  const nextPg = () => {
-    setBack(false);
-    setVisible((prev) => (prev === 10 ? 10 : prev + 1));
-  };
-  const prevPg = () => {
-    setBack(true);
-    setVisible((prev) => (prev === 1 ? 11 : prev - 1));
-  };
+  const [id, setId] = useState<null | string>(null);
   return (
     <Wrapper>
-      <AnimatePresence custom={back}>
-        <Box
-          custom={back}
-          variants={myVar}
-          initial="entry"
-          animate="center"
-          exit="exit"
-          key={visible}
-        >
-          {visible}
-        </Box>
+      <Grid>
+        {["1", "2", "3", "4"].map((n) => (
+          <Box onClick={() => setId(n)} key={n} layoutId={n} />
+        ))}
+      </Grid>
+      <AnimatePresence>
+        {id ? (
+          <Overlay
+            onClick={() => setId(null)}
+            initial={{ backgroundColor: "rgba(0,0,0,0)" }}
+            animate={{ backgroundColor: "rgba(0,0,0,0.7)" }}
+            exit={{ backgroundColor: "rgba(0,0,0,0)" }}
+          >
+            <Box layoutId={id} style={{ width: 400, height: 150 }} />
+          </Overlay>
+        ) : null}
       </AnimatePresence>
-      <button onClick={prevPg}>prev</button>
-      <button onClick={nextPg}>next</button>
     </Wrapper>
   );
 }

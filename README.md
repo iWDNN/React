@@ -723,8 +723,9 @@ function App() {
   - x.onChange(() => console.log(x.get()));
 - useTransForm : Motion values와 값을 연결해주는 훅
 - useViewportScroll : scroll 액션에 따른 값 설정
-- animatePresence : custom, exitBeforeEnter
-- react.js component들은 key에 따라 생성된다.
+- animatePresence : custom, exit, exitBeforeEnter
+- layout : 최적 애니메이션
+- layoutId : 컴포넌트 간들의 애니메이션 연결
 
   hook
   regexp
