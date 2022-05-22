@@ -719,6 +719,7 @@ function App() {
 
 `Motion Value`
 
+- svg의 viewBox 속성 viewBox="<min-x> <min-y> <width> <height>"
 - useMotionValue : React의 state에 종속되지 않은 값 (값이 바뀌어도 재렌더링이 일어나지 않음)
   - x.onChange(() => console.log(x.get()));
 - useTransForm : Motion values와 값을 연결해주는 훅
@@ -726,6 +727,10 @@ function App() {
 - animatePresence : custom, exit, exitBeforeEnter
 - layout : 최적 애니메이션
 - layoutId : 컴포넌트 간들의 애니메이션 연결
+
+## `Nomflix clone'
+
+- fillOpacity:[0,0.5,0,0.7,0]
 
   hook
   regexp
