@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Link, useMatch, PathMatch } from "react-router-dom";
-
+import { useLayoutEffect, useRef, useState } from "react";
 const Nav = styled.nav`
   box-sizing: border-box;
   display: flex;
@@ -22,7 +22,7 @@ const Col = styled.div`
 const Logo = styled(motion.svg)`
   width: 95px;
   height: 25px;
-  margin-right: 50px;
+  margin-right: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,19 +35,20 @@ const Items = styled.ul`
   display: flex;
   align-items: center;
 `;
-const Item = styled.li`
+const Item = styled.li<{ isActive: boolean }>`
   font-weight: 600;
   margin-right: 20px;
-  color: ${(props) => props.theme.white.darker};
+  color: ${(props) => (props.isActive ? "white" : props.theme.white.darker)};
   position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  font-size: 14px;
   &:hover {
     color: ${(props) => props.theme.white.lighter};
   }
 `;
-const UnderLine = styled.div`
+const UnderLine = styled(motion.div)`
   position: absolute;
   width: 15px;
   height: 2px;
@@ -58,6 +59,38 @@ const UnderLine = styled.div`
   border-radius: 5px;
   background-color: ${(props) => props.theme.red};
 `;
+
+const SearchBox = styled.div`
+  display: flex;
+  align-items: center;
+  color: white;
+`;
+
+const SearchIcon = styled.svg`
+  width: 20px;
+  height: 20px;
+  padding: 0 6px;
+`;
+
+const InputBox = styled(motion.div)`
+  display: flex;
+  align-items: center;
+  border: 1px solid white;
+  padding: 5px;
+  transform-origin: right center;
+  input {
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.7);
+    outline: none;
+    color: white;
+    border: none;
+    padding: 5px 0;
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+`;
+
 const svgVar: Variants = {
   start: {
     pathLength: 0,
@@ -79,9 +112,13 @@ const svgVar: Variants = {
 };
 
 function Header() {
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const homeMatch: PathMatch<string> | null = useMatch("/");
   const tvMatch: PathMatch<string> | null = useMatch("/tv");
-  console.log(homeMatch, tvMatch);
+
   return (
     <Nav>
       <Col>
@@ -97,30 +134,48 @@ function Header() {
           />
         </Logo>
         <Items>
-          <Item>
+          <Item isActive={homeMatch !== null}>
             <Link to="/">
-              Home
-              {homeMatch && <UnderLine />}
+              홈{homeMatch && <UnderLine layoutId="underline" />}
             </Link>
           </Item>
-          <Item>
+          <Item isActive={tvMatch !== null}>
             <Link to="tv">
-              Tv Shows
-              {tvMatch && <UnderLine />}
+              시리즈
+              {tvMatch && <UnderLine layoutId="underline" />}
             </Link>
           </Item>
         </Items>
       </Col>
       <Col>
-        <svg
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-          width={20}
-          height={20}
-          fill="white"
+        <SearchBox
+          onBlur={() => setSearchOpen((prev) => !prev)}
+          onClick={async () => {
+            await setSearchOpen(true);
+            if (inputRef.current !== null) inputRef.current.focus();
+          }}
         >
-          <path d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
-        </svg>
+          {searchOpen ? (
+            <InputBox initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}>
+              <SearchIcon
+                fill="white"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z" />
+              </SearchIcon>
+              <input ref={inputRef} placeholder="제목, 사람, 장르" />
+            </InputBox>
+          ) : (
+            <SearchIcon
+              fill="white"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z" />
+            </SearchIcon>
+          )}
+        </SearchBox>
       </Col>
     </Nav>
   );

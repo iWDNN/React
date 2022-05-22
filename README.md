@@ -728,6 +728,36 @@ function App() {
 - layout : 최적 애니메이션
 - layoutId : 컴포넌트 간들의 애니메이션 연결
 
+# 8.2
+
+넷플릭스 로고 SVG 필요하신 분들은 아래 링크에서 개발자 도구에서 svg태그 복사해서 쓰시면 됩니다.
+https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg
+
+React Router 5버전 => useRouteMatch() 사용
+const homeMatch = useRouteMatch("/")
+https://v5.reactrouter.com/web/api/Hooks/useroutematch
+
+React Router 6버전에서는 useRoute()가 useMatch()로 대체되었습니다.
+
+```
+import { Link, useMatch, PathMatch } from "react-router-dom";
+
+const homeMatch: PathMatch< string > | null = useMatch("/");
+```
+
+https://reactrouter.com/docs/en/v6/upgrading/reach#usematch
+https://reach.tech/router/api/useMatch
+
+Framer Motion repeat
+https://www.framer.com/docs/transition/###repeat
+
+whileHover
+호버 제스처가 인식되는 동안 애니메이션할 속성 또는 variant label입니다.
+ex) < motion.div whileHover={{ scale: 1.2 }} / >
+https://www.framer.com/docs/gestures/###whilehover
+
+# 8.3
+
 ## `Nomflix clone'
 
 - fillOpacity:[0,0.5,0,0.7,0]
