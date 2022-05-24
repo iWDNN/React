@@ -37,6 +37,7 @@ body {
 	font-family: 'Source Sans Pro',sans-serif;
 	color:${(props) => props.theme.white.darker};
 	background-color: black;
+	overflow-x:hidden;
 }
 ol, ul {
 	list-style: none;

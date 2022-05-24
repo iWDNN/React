@@ -724,7 +724,7 @@ function App() {
   - x.onChange(() => console.log(x.get()));
 - useTransForm : Motion values와 값을 연결해주는 훅
 - useViewportScroll : scroll 액션에 따른 값 설정
-- animatePresence : custom, exit, exitBeforeEnter
+- animatePresence : 컴포넌트가 랜더되거나 사라질때 효과를 줄수 있음
 - layout : 최적 애니메이션
 - layoutId : 컴포넌트 간들의 애니메이션 연결
 
