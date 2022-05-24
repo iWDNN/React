@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { motion, Variants, useAnimation, useViewportScroll } from "framer-motion";
+import {
+  motion,
+  Variants,
+  useAnimation,
+  useViewportScroll,
+} from "framer-motion";
 import { Link, useMatch, PathMatch } from "react-router-dom";
 import { useEffect, useState } from "react";
 const Nav = styled(motion.nav)`
@@ -66,23 +71,22 @@ const Search = styled.span`
   position: relative;
 `;
 const SearchIcon = styled(motion.svg)`
-  position:absolute;
-  left : 10px;
-  height:25px;
-`
+  position: absolute;
+  left: 10px;
+  height: 25px;
+`;
 
 const Input = styled(motion.input)`
   transform-origin: right center;
   position: absolute;
-  right:0;
+  right: 0;
   z-index: -1;
   background-color: black;
-  outline:none;
-  border:1px solid white;
+  outline: none;
+  border: 1px solid white;
   padding: 7px 0 7px 35px;
-  color:white;
+  color: white;
 `;
-
 
 const svgVar: Variants = {
   start: {
@@ -106,12 +110,12 @@ const svgVar: Variants = {
 
 const navVar: Variants = {
   top: {
-    backgroundColor: "rgba(0,0,0,0)"
+    backgroundColor: "rgba(0,0,0,0)",
   },
   scroll: {
     backgroundColor: "rgba(0,0,0,1)",
-  }
-}
+  },
+};
 
 function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -122,35 +126,30 @@ function Header() {
   const toggleSearch = () => {
     if (searchOpen) {
       inputAnimation.start({
-        scaleX: 0
-      })
+        scaleX: 0,
+      });
     } else {
       inputAnimation.start({
-        scaleX: 1
-      })
+        scaleX: 1,
+      });
     }
-    setSearchOpen(prev => !prev)
-  }
+    setSearchOpen((prev) => !prev);
+  };
   useEffect(() => {
     scrollY.onChange(() => {
       if (scrollY.get() > 80) {
-        navAnimation.start("scroll")
+        navAnimation.start("scroll");
       } else {
-        navAnimation.start("top")
+        navAnimation.start("top");
       }
-    })
-  }, [scrollY, navAnimation])
-
+    });
+  }, [scrollY, navAnimation]);
 
   const homeMatch: PathMatch<string> | null = useMatch("/");
   const tvMatch: PathMatch<string> | null = useMatch("/tv");
 
   return (
-    <Nav
-      variants={navVar}
-      animate={navAnimation}
-      initial="top"
-    >
+    <Nav variants={navVar} animate={navAnimation} initial="top">
       <Col>
         <Logo xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 276.742">
           <motion.path
@@ -187,11 +186,11 @@ function Header() {
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path
+            <motion.path
               fillRule="evenodd"
               d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
               clipRule="evenodd"
-            ></path>
+            ></motion.path>
           </SearchIcon>
           <Input
             animate={inputAnimation}
@@ -201,7 +200,7 @@ function Header() {
           />
         </Search>
       </Col>
-    </Nav >
+    </Nav>
   );
 }
 export default Header;
