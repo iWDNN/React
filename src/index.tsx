@@ -58,6 +58,9 @@ a{
 	color:inherit;
 	text-decoration: none;
 }
+*{
+	box-sizing: border-box;
+}
 `;
 const client = new QueryClient();
 
