@@ -457,7 +457,7 @@ const { isLoading: tickersLoading, data: tickersData } = useQuery(
 </Link>
 ```
 
-- 이 방식의 경우 정보를 얻는 `화면을 거쳐가지않고 바로 이동하다면` 에러가 발생한다.
+- 이 방식의 경우 정보를 얻는 `메인을 거쳐가지않고 바로 특정 주소로 하다면` 에러가 발생한다.
 
 ```tsx
 <Title>{state?.name || "Loading..."}</Title>
